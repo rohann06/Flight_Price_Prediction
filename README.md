@@ -42,4 +42,33 @@
 
 ## 👉 EDA part :-
 
+#### 🔸 step 1 : In EDA part, first of all we find some odd columns which neet to be fixed, colimns like "Date_of_journey", "dep_time", "Arrival_time".
+
+![EDA 1](https://user-images.githubusercontent.com/75326769/141733110-ba83c430-f546-4c64-bb4b-1930856e40b8.png)
+
+#### 🔸 step 2 :  For the "Date_of_jorney" I've create one function named "date" and and using (pd.to_datetime) Picked the journey bay and journey month from it and drop the Date_of_jorney column.
+
+![EDA 2](https://user-images.githubusercontent.com/75326769/141734085-bd441b94-7863-4e83-a95f-6ef2a117489a.png)
+
+#### 🔸 step 3 : There are two columns with the same formats name "Dep_Time", "Arrival_Time". to solve this I've Picked the Dep_hours and Dep_min and, Arrival_hours and Arrival_min using same (pd.to_datetime) adn droped bothe the columns.
+
+#### For Dep_Time :
+![EDA 3](https://user-images.githubusercontent.com/75326769/141736683-572ce0a0-257a-41b2-8052-cc51181b206a.png)
+
+#### Fro Arrival_Time :
+![EDA 4](https://user-images.githubusercontent.com/75326769/141736780-0e06af9f-3297-4aef-a04f-6b9027f5a950.png)
+
+
+#### 🔸 step 4 : Picking the hours and minutes from the "Duration" coloumn
+![EDA 5](https://user-images.githubusercontent.com/75326769/141746227-1b144ebe-5814-4478-b22c-28e57dc0ee5e.png)
+
+
+## 👉 Select the Algorithm :-
+![Screenshot 2021-11-15 135539](https://user-images.githubusercontent.com/75326769/141747405-ccafe4e7-071f-4192-a68a-ff4a1d04cdfc.png)
+
+#### -> As we see in this comparision table the "DecisionTreeRegressor" performing very well on the dataset
+![algo](https://user-images.githubusercontent.com/75326769/141749087-9cd07037-b899-4d49-9f61-418aef964bad.png)
+
+ 
+
 
