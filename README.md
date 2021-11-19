@@ -44,23 +44,62 @@
 
 #### 🔸 step 1 : In EDA part, first of all we find some odd columns which neet to be fixed, colimns like "Date_of_journey", "dep_time", "Arrival_time".
 
+
 ![EDA 1](https://user-images.githubusercontent.com/75326769/141733110-ba83c430-f546-4c64-bb4b-1930856e40b8.png)
 
 #### 🔸 step 2 :  For the "Date_of_jorney" I've create one function named "date" and and using (pd.to_datetime) Picked the journey bay and journey month from it and drop the Date_of_jorney column.
 
-![EDA 2](https://user-images.githubusercontent.com/75326769/141734085-bd441b94-7863-4e83-a95f-6ef2a117489a.png)
+```py
+def date(data):
+    data['Journey_day'] = pd.to_datetime(data['Date_of_Journey'], format="%d/%m/%Y").dt.day
+    data['Journey_month'] = pd.to_datetime(data['Date_of_Journey'], format="%d/%m/%Y").dt.month
+    data.drop(["Date_of_Journey"], axis = 1, inplace = True)
+```
 
 #### 🔸 step 3 : There are two columns with the same formats name "Dep_Time", "Arrival_Time". to solve this I've Picked the Dep_hours and Dep_min and, Arrival_hours and Arrival_min using same (pd.to_datetime) adn droped bothe the columns.
 
 #### For Dep_Time :
-![EDA 3](https://user-images.githubusercontent.com/75326769/141736683-572ce0a0-257a-41b2-8052-cc51181b206a.png)
+
+```py
+def dep_time(data):
+    data["Dep_hour"] = pd.to_datetime(data["Dep_Time"]).dt.hour
+    data["Dep_min"] = pd.to_datetime(data["Dep_Time"]).dt.minute
+    data.drop(["Dep_Time"], axis = 1, inplace = True)
+```
 
 #### Fro Arrival_Time :
-![EDA 4](https://user-images.githubusercontent.com/75326769/141736780-0e06af9f-3297-4aef-a04f-6b9027f5a950.png)
+
+```py
+def Arrival_time(data):
+    data["Arrival_hour"] = pd.to_datetime(data["Arrival_Time"]).dt.hour
+    data["Arrival_min"] = pd.to_datetime(data["Arrival_Time"]).dt.minute
+    data.drop(["Arrival_Time"], axis = 1, inplace = True)
+```
 
 
 #### 🔸 step 4 : Picking the hours and minutes from the "Duration" coloumn
-![EDA 5](https://user-images.githubusercontent.com/75326769/141746227-1b144ebe-5814-4478-b22c-28e57dc0ee5e.png)
+
+```py
+def duration(data):
+    duration = list(data["Duration"])
+
+    for i in range(len(duration)):
+        if len(duration[i].split()) != 2:    # Check if duration contains only hour or mins
+            if "h" in duration[i]:
+                duration[i] = duration[i].strip() + " 0m"   # Adds 0 minute
+            else:
+                duration[i] = "0h " + duration[i]           # Adds 0 hour
+
+    duration_hours = []
+    duration_mins = []
+    for i in range(len(duration)):
+        duration_hours.append(int(duration[i].split(sep = "h")[0]))    # Extract hours from duration
+        duration_mins.append(int(duration[i].split(sep = "m")[0].split()[-1]))   # Extracts only minutes from duration
+    data["Duration_hours"] = duration_hours
+    data["Duration_mins"] = duration_mins 
+    
+    data.drop(["Duration"], axis = 1, inplace = True)
+```
 
 
 ## 👉 Select the Algorithm :-
