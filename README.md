@@ -1,6 +1,6 @@
 # Flight_Price_Prediction
 
-#### ➡️ This machine learning model predict the price of the Flight ticket using some parameters
+#### ➡️ This supervised machine learning model predict the price of the Flight ticket using some parameters
 
 ## 👉 Parameters
 #### 1⃣ Airline name 
